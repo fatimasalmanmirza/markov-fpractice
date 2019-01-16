@@ -1,6 +1,6 @@
 """Generate Markov text from text files."""
 
-from random import choice
+import random 
 
 
 def open_and_read_file(file_path):
@@ -56,47 +56,36 @@ def make_chains(text_string):
             chains[tupled_items] = value_items
         else:
             chains[tupled_items] = chains[tupled_items] + value_items
-    print(chains)
+    return chains
 
-    #         for tupled_items in words:
-    #             # value_add = words[tupled_items[index]]
-    #     value_list.append(value_add)
-    #     chains[tupled_items] = value_list        
-    #     # tupled_items = (words[index], words[index + 1])
-    
-    #         #chains[tupled_items] = value_list
-
-    #     # if words[index] != words[-2]:
-    #     #     for pair in tupled_items:
-    #     #         value_add = [words[index + 2]]
-    #     #         value_list.append(value_add)
-    #     #     chains[tupled_items] = value_list
-    #     # else:
-    #     #     pass
-    # #value_list = []   
-    # # for  tuples in tupled_items:
-    # #     value_list.append(tupled_items[index])
-
-    # chains[tupled_items] = value_list
-    # print(chains.items())
-    # # your code goes here
-
-    # #return chains
 make_chains(open_and_read_file("green-eggs.txt"))
 
 
 def make_text(chains):
     """Return text from chains."""
-
+    # tuple index 1 is a new key
+    # random item from the value list is the value
+    # add tuple key word and random item word to list, join list
+    
+    
+   #print(chains)
     words = []
+    new_chains = {}
 
-    # your code goes here
-
-    return " ".join(words)
+    
+    for key_pair, value_lists in chains.items():
+        new_chains[key_pair[1]] = random.choice(value_lists)
+    for keys, value_items in new_chains.items():
+        if keys not in words:
+            words.append(keys)
+            words.append(value_items)
+    
+   
+    print(" ".join(words))
 
 
 input_path = "green-eggs.txt"
-
+make_text(make_chains(open_and_read_file("green-eggs.txt")))
 # # Open the file and turn it into one long string
 # input_text = open_and_read_file(input_path)
 
